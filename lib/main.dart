@@ -10,15 +10,16 @@ class MyApp extends StatefulWidget{ //Changing state class widget
     return MyAppState();
   }
 }
-var questionIndex = 0;
-class MyAppState extends State<MyApp>{  //Persistant state class widget 
+var _questionIndex = 0;
+class _MyAppState extends State<MyApp>{  //Persistant state class widget 
+ // _ClassName turns it into a private class for only be used in "MyAPP" class
  Widget build(BuildContext context){
 
-  void answerQuestion(){
+  void _answerQuestion(){
     setState((){
-    questionIndex = questionIndex + 1;
+    _questionIndex = _questionIndex + 1;
     });
-    print(questionIndex);
+    print(_questionIndex);
   }
   @override
    var questions =  ['What\'s are your favourite color?', 'What\'s are your favourite animal?' ];
@@ -29,8 +30,8 @@ class MyAppState extends State<MyApp>{  //Persistant state class widget
          ), 
           body: Column(
             children: [
-            Text(questions.elementAt(questionIndex)),  
-            RaisedButton(child: Text('Answer 1'),onPressed: answerQuestion), //Passed just pointer to function for later execution
+            Text(questions.elementAt(_questionIndex)),  
+            RaisedButton(child: Text('Answer 1'),onPressed: _answerQuestion), //Passed just pointer to function for later execution
             RaisedButton(child: Text('Anonymous function call'),onPressed: ()=>{
               print('Anonymous function called')
             }), // Running anonymous function
