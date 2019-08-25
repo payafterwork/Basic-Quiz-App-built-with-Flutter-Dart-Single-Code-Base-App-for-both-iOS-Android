@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 void main(){
  runApp(MyApp());
 }
@@ -17,7 +17,7 @@ class MyAppState extends State<MyApp>{  //Persistant state class widget
  // _ClassName turns it into a private class for only be used in "MyAPP" class
  Widget build(BuildContext context){
  @override
-   final questions = const [
+   final _questions = const [
     {
       'questionText': 'What\'s are your favourite color?',
       'answers': ['Black', 'Red', 'Green', 'White']
@@ -28,7 +28,7 @@ class MyAppState extends State<MyApp>{  //Persistant state class widget
     },     
    ];
   void _answerQuestion(){
-    if(_questionIndex < questions.length){
+    if(_questionIndex < _questions.length){
       setState((){
           _questionIndex = _questionIndex + 1;
       });
@@ -43,18 +43,15 @@ class MyAppState extends State<MyApp>{  //Persistant state class widget
          appBar: AppBar(
            title: Text('My First App'), 
          ), 
-          body: _questionIndex < questions.length ? Column(
-            children: [
-            Question(
-              questions[_questionIndex]['questionText']
-            ),  
-           ...(questions[_questionIndex]['answers'] as List<String>).map((answer){
-              return Answer(_answerQuestion, answer);     
-           }).toList()
-           ],
-       ) : Center(child: Text('Quiz over!')),
-       )
-    );
+          body: _questionIndex < _questions.length ? 
+          Quiz
+          (answerQuestion: _answerQuestion,
+           questionIndex: _questionIndex,
+           questions: _questions) : 
+           Result()
+           ),
+       );
+  
   }
 }
    
