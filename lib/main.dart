@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import './question.dart';
 void main(){
  runApp(MyApp());
 }
 
+var _questionIndex = 0;
 class MyApp extends StatefulWidget{ //Changing state class widget
   @override
   State<StatefulWidget> createState() {
@@ -10,8 +12,7 @@ class MyApp extends StatefulWidget{ //Changing state class widget
     return MyAppState();
   }
 }
-var _questionIndex = 0;
-class _MyAppState extends State<MyApp>{  //Persistant state class widget 
+class MyAppState extends State<MyApp>{  //Persistant state class widget 
  // _ClassName turns it into a private class for only be used in "MyAPP" class
  Widget build(BuildContext context){
 
@@ -30,7 +31,7 @@ class _MyAppState extends State<MyApp>{  //Persistant state class widget
          ), 
           body: Column(
             children: [
-            Text(questions.elementAt(_questionIndex)),  
+            Question(questions.elementAt(_questionIndex)),  
             RaisedButton(child: Text('Answer 1'),onPressed: _answerQuestion), //Passed just pointer to function for later execution
             RaisedButton(child: Text('Anonymous function call'),onPressed: ()=>{
               print('Anonymous function called')
