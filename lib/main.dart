@@ -16,15 +16,8 @@ class MyApp extends StatefulWidget{ //Changing state class widget
 class MyAppState extends State<MyApp>{  //Persistant state class widget 
  // _ClassName turns it into a private class for only be used in "MyAPP" class
  Widget build(BuildContext context){
-
-  void _answerQuestion(){
-    setState((){
-    _questionIndex = _questionIndex + 1;
-    });
-    print(_questionIndex);
-  }
-  @override
-   var questions =  [
+ @override
+   final questions = const [
     {
       'questionText': 'What\'s are your favourite color?',
       'answers': ['Black', 'Red', 'Green', 'White']
@@ -34,12 +27,23 @@ class MyAppState extends State<MyApp>{  //Persistant state class widget
       'answers': ['Rabit', 'Lion', 'Tiger', 'Snake']
     },     
    ];
+  void _answerQuestion(){
+    if(_questionIndex < questions.length){
+      setState((){
+          _questionIndex = _questionIndex + 1;
+      });
+    }else{
+      print("Questions finished");
+    }
+    
+  }
+  
     return MaterialApp(
        home: Scaffold(
          appBar: AppBar(
            title: Text('My First App'), 
          ), 
-          body: Column(
+          body: _questionIndex < questions.length ? Column(
             children: [
             Question(
               questions[_questionIndex]['questionText']
@@ -48,7 +52,7 @@ class MyAppState extends State<MyApp>{  //Persistant state class widget
               return Answer(_answerQuestion, answer);     
            }).toList()
            ],
-       )
+       ) : Center(child: Text('Quiz over!')),
        )
     );
   }
