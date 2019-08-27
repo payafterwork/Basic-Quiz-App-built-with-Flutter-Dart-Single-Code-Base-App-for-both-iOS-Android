@@ -1,4 +1,4 @@
-# app
+# Basic Quiz App built on Flutter & Dart for iOS & Android with Single Code Base.
 
 A new Flutter project.
 
